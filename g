@@ -1,6 +1,7 @@
 #!/usr/bin/env ruby
 
 require 'google-search'
+require 'rainbow'
 
 if ARGV.empty?
   print "Usage: g [query terms]"
@@ -15,12 +16,14 @@ links = []
 Google::Search::Web.new(query: query, size: :small).all.first(10).each do |result|
   links << result.uri
   
-  puts links.count.to_s + ". " + result.title
+  puts Rainbow("#{links.count.to_s}) " + result.title).yellow
   puts result.content
-  puts result.uri
+  puts Rainbow(result.uri).magenta
+
+  puts
 end
 
-print "result: "
+print Rainbow("result: ").red
 index = STDIN.gets.to_i
 
 exec ( "lynx #{links[index]}" )
