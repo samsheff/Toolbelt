@@ -26,4 +26,4 @@ end
 print Rainbow("result: ").red
 index = STDIN.gets.to_i
 
-exec ( "lynx #{links[index]}" )
+exec ( "open #{links[index]}" )
